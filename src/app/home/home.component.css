@@ -1,0 +1,47 @@
+.layout {
+  display: grid;
+  grid-template-columns: 275px auto 350px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.layout__right-sidebar {
+  position: fixed;
+  width: 350px;
+}
+
+.brand {
+  height: 28px;
+  filter: invert(90%) sepia(8%) saturate(70%) hue-rotate(161deg) brightness(95%) contrast(94%);
+  padding: 10px;
+}
+
+.sidebar-menu {
+  position: fixed;
+}
+
+.sidebar-menu__item {
+  font-size: 19px;
+  color: #CACCCD;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  padding: 10px;
+}
+
+.sidebar-menu__item:hover {
+  background: rgba(24, 24, 24, 1);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.sidebar-menu__item--active {
+  font-weight: 700;
+}
+
+.sidebar-menu__icon {
+  height: 26px;
+  filter: invert(100%) sepia(1%) saturate(2990%) hue-rotate(171deg) brightness(83%) contrast(91%);
+  margin-right: 20px;
+}
+

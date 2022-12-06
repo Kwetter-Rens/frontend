@@ -1,0 +1,50 @@
+<div class="layout">
+  <div class="layout__left-sidebar">
+    <img class="brand" src="./assets/svg/twitter.svg">
+    <div class="sidebar-menu">
+      <div class="sidebar-menu__item sidebar-menu__item--active">
+        <img src="../../assets/svg/home_active.svg" class="sidebar-menu__icon">
+        Home
+      </div>
+      <div class="sidebar-menu__item" (click)="this.route.navigate(['/' + this.authUser?.nickname])">
+        <img src="./assets/svg/profile.svg" class="sidebar-menu__icon">
+        Profile
+      </div>
+      <div class="sidebar-menu__item" (click)="this.route.navigate(['/adminpage'])">
+        <img src="./assets/images/admin.png" class="sidebar-menu__icon">
+        Admin
+      </div>
+    </div>
+  </div>
+
+
+  <div class="layout__main">
+    <div *ngIf="profile?.followingUserIds">
+      <app-tweets [profile]="profile"></app-tweets>
+    </div>
+  </div>
+
+
+  <div class="layout__right-sidebar-container">
+    <div class="layout__right-sidebar">
+      <ng-container *ngIf="auth.isAuthenticated$">
+        <button (click)="route.navigate(['/logout'])">Logout</button>
+      </ng-container>
+    </div>
+
+
+      <div class="post-tweet">
+        <img class="post-tweet__author-logo" [src]=this.authUser?.picture>
+        <div class="post-tweet__content">
+          <input type="text" id="tweetText" name="tweetText" [(ngModel)]="tweetText"> <!--placeholder="What's happening?" class="post-tweet__input-tweet">-->
+        </div>
+        <div class="post-tweet__submit">
+          <button (click)="postTweet()" class="post-tweet__submit-button">Tweet</button>
+        </div>
+        <div>
+          {{lambdaResponse}}
+<!--          {{authUser?.sub}}-->
+        </div>
+      </div>
+  </div>
+</div>
