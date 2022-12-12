@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable, Subscription} from "rxjs";
-import {Relation} from "../../interfaces/relation";
+import {Relation} from "../../__interfaces/relation";
 
-const baseUrl = 'http://localhost:8080/relation';
+const baseUrl = 'http://localhost:8080/api/v1/relation';
 
 @Injectable({
   providedIn: 'root'

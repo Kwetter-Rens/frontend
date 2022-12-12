@@ -2,10 +2,10 @@
   <img class="tweet__author-logo" [src]=tweet.userPicture>
   <div class="tweet__main">
     <div class="tweet__header">
-      <div class="tweet__author-name" (click)="router.navigate(['/' + tweet.username])">{{tweet.username}}</div>
-      <div class="tweet__author-slug">{{tweet.userSlug}}</div>
-      <div class="tweet__publish-time">{{tweet.timeSent}}</div>
+      <div class="tweet__author-name" (click)="router.navigate(['/' + tweet.userId])">{{tweet.username}}</div>
+<!--      <div class="tweet__author-slug">{{tweet.userSlug}}</div>-->
+      <div class="tweet__publish-time">{{tweet.creationTime}}</div>
     </div>
-    <div class="tweet__content">{{tweet.message}}</div>
+    <div class="tweet__content">{{tweet.content}}</div>
   </div>
 </div>

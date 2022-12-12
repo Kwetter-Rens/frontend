@@ -7,22 +7,22 @@
 <div *ngIf="!profileNotFound; else profileFound">
   <p>{{this.profile?.username}}</p>
   <p>{{this.profile?.userEmail}}</p>
-<!--  <p>{{this.profile?.userId}}</p>-->
+  <p>{{this.profile?.userId}}</p>
   <img src="{{profile?.userPicture}}">
   <p>{{this.profile?.bio}}</p>
 
-  <div *ngIf="profile?.username != currentAuthUser?.nickname && !isFollowing">
+  <div *ngIf="profile?.userId != currentAuthUser?.sub && !isFollowing">
     <button (click)="followProfile()">Follow</button>
   </div>
 
   <div *ngIf="isFollowing">
     <button (click)="unfollowProfile()">Unfollow</button>
   </div>
-
 </div>
 
-
-
+<div *ngIf="profile?.userId == currentAuthUser?.sub">
+  <button (click)="deleteProfile()">Delete Profile</button>
+</div>
 <ng-template #profileFound>
   <p>This profile has not been found</p>
 </ng-template>

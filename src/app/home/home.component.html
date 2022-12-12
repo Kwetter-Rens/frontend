@@ -6,14 +6,14 @@
         <img src="../../assets/svg/home_active.svg" class="sidebar-menu__icon">
         Home
       </div>
-      <div class="sidebar-menu__item" (click)="this.route.navigate(['/' + this.authUser?.nickname])">
+      <div class="sidebar-menu__item" (click)="this.route.navigate(['/' + this.authUser?.sub])">
         <img src="./assets/svg/profile.svg" class="sidebar-menu__icon">
         Profile
       </div>
-      <div class="sidebar-menu__item" (click)="this.route.navigate(['/adminpage'])">
-        <img src="./assets/images/admin.png" class="sidebar-menu__icon">
-        Admin
-      </div>
+<!--      <div class="sidebar-menu__item" (click)="this.route.navigate(['/adminpage'])">-->
+<!--        <img src="./assets/images/admin.png" class="sidebar-menu__icon">-->
+<!--        Admin-->
+<!--      </div>-->
     </div>
   </div>
 

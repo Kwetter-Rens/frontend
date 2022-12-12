@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Tweet } from '../interfaces/tweet';
+import { Tweet } from '../__interfaces/tweet';
 import {HttpClient} from "@angular/common/http";
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -7,7 +7,8 @@ import {TweetService} from "../__services/tweet/tweet.service";
 import {UserService} from "../__services/user/user.service";
 import {User} from "@auth0/auth0-angular";
 import {Router} from "@angular/router";
-import {Profile} from "../interfaces/profile";
+import {Profile} from "../__interfaces/profile";
+import {ProfileService} from "../__services/profile/profile.service";
 
 @Component({
   selector: 'app-tweets',
@@ -20,8 +21,13 @@ export class TweetsComponent implements OnInit {
 
   public tweets: Tweet[] = []
 
-  constructor(private http: HttpClient, private tweetService: TweetService, private userService: UserService, public router: Router) {
-  }
+  constructor(
+    private http: HttpClient,
+    private tweetService: TweetService,
+    private userService: UserService,
+    public router: Router,
+    private profileService: ProfileService
+  ) { }
 
   ngOnInit(): void {
     this.getTweetsOfUsers(this.profile.followingUserIds)

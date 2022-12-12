@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from "@auth0/auth0-angular";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProfileService} from "../__services/profile/profile.service";
-import {Tweet} from "../interfaces/tweet";
-import {Profile} from "../interfaces/profile";
+import {Tweet} from "../__interfaces/tweet";
+import {Profile} from "../__interfaces/profile";
 import {fakeAsync} from "@angular/core/testing";
 import {RelationService} from "../__services/relation/relation.service";
-import {Relation} from "../interfaces/relation";
+import {Relation} from "../__interfaces/relation";
 import {SessionStorageService} from "ngx-webstorage";
 import {Observable} from "rxjs";
+import {UserService} from "../__services/user/user.service";
+import {TweetService} from "../__services/tweet/tweet.service";
 
 @Component({
   selector: 'app-profile',
@@ -16,7 +18,7 @@ import {Observable} from "rxjs";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  profile: Profile | undefined;
+  profile: Profile;
   profileNotFound = false;
   currentAuthUser: any;
   following: any;
@@ -28,7 +30,9 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
     public auth: AuthService,
     private profileService: ProfileService,
-    private relationService: RelationService
+    private relationService: RelationService,
+    private userService: UserService,
+    private tweetService: TweetService
   ) { }
 
   ngOnInit(): void {
@@ -56,7 +60,7 @@ export class ProfileComponent implements OnInit {
   }
 
   private getProfile(_profilename: any) {
-    this.profileService.getProfileWithRelationByName(_profilename).subscribe(
+    this.profileService.getProfileWithRelationById(_profilename).subscribe(
       (Response: Profile) =>
       {
         this.profile = Response;
@@ -65,7 +69,7 @@ export class ProfileComponent implements OnInit {
           this.profileNotFound = true;
           return;
         }
-        console.log('profileId: ' + this.profile.userId)
+        console.log('profileId: ' + this.profile?.userId)
         if(this.currentAuthUser !== undefined) {
           this.isFollowingUser(this.profile.userId)
         }
@@ -108,5 +112,14 @@ export class ProfileComponent implements OnInit {
     // @ts-ignore
     this.relationService.deleteRelation(this.currentAuthUser.sub, this.profile.userId)
     this.isFollowing = false;
+  }
+
+  deleteProfile() {
+    if (confirm("Are you sure to delete " + this.profile.username + "?")) {
+      this.tweetService.deleteUserFromTweets(this.profile.userId);
+      // this.userService.deleteUser(this.profile.userId);
+      this.profileService.deleteProfile(this.profile.userId);
+      this.auth.logout();
+    }
   }
 }
