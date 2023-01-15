@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
   }
 
   postTweet() {
-    let newTweet = new Tweet(new Date(), this.tweetText, this.authUser.sub, this.profile.username, this.profile.userPicture);
+    let newTweet = new Tweet(new Date(), this.tweetText, this.authUser.sub, this.authUser.sub, "https://i1.wp.com/cdn.auth0.com/avatars/ad.png?ssl=1");
     this.tweetService.postTweet(newTweet);
     this.tweetText = "";
     this.tweetsComponent.tweets.push(newTweet);

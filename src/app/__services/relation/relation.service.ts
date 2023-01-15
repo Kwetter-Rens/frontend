@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, Subscription} from "rxjs";
 import {Relation} from "../../__interfaces/relation";
 
@@ -23,5 +23,15 @@ export class RelationService {
   deleteRelation(currentUserId: string, profileUserId: string) {
     console.log("deleting relationship of " + currentUserId + " and " + profileUserId)
     return this.http.delete(baseUrl + '/' + currentUserId + '/' + profileUserId).subscribe()
+  }
+
+  private getHttpOptions() {
+    const jwtToken = localStorage.getItem("token");
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + jwtToken
+      })
+    };
   }
 }

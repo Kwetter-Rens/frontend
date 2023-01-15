@@ -27,4 +27,14 @@ export class UserService {
   deleteUser(userId: string) {
     this.http.delete(baseUrl + userId, requestOptions).subscribe(r => {});
   }
+
+  private getHttpOptions() {
+    const jwtToken = localStorage.getItem("token");
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + jwtToken
+      })
+    };
+  }
 }

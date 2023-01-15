@@ -30,7 +30,8 @@ export class TweetsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getTweetsOfUsers(this.profile.followingUserIds)
+    //this.getTweetsOfUsers(this.profile.followingUserIds)
+    this.getAllTweets();
   }
 
   public getTweetsOfUsers(followingIds: string[]) {
@@ -41,5 +42,13 @@ export class TweetsComponent implements OnInit {
         }
       );
     }
+  }
+
+  public getAllTweets() {
+    this.tweetService.getTweets().subscribe(
+      (Response: Tweet[]) => {
+        this.tweets = Response
+      }
+    );
   }
 }
